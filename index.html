@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Copilot Search - Groups Filter Prototype</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo-section">
+                <i class="fas fa-robot copilot-icon"></i>
+                <span class="logo-text">Copilot Search</span>
+            </div>
+            <div class="user-section">
+                <i class="fas fa-user-circle user-icon"></i>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Search Section -->
+            <div class="search-section">
+                <div class="search-container">
+                    <div class="search-bar">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" id="searchInput" placeholder="Search for files, documents, people, and more..." value="group">
+                        <button class="search-button" id="searchButton">
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Filters and Results Section -->
+            <div class="content-container">
+                <!-- Main Results Area -->
+                <div class="results-main">
+                    <!-- Top Filters Bar -->
+                    <div class="top-filters">
+                        <!-- Modified Filter -->
+                        <div class="filter-pill">
+                            <button class="filter-button" id="modifiedButton">
+                                <i class="fas fa-clock"></i>
+                                Modified
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div class="filter-dropdown" id="modifiedDropdown">
+                                <div class="filter-option" data-value="anytime">Anytime</div>
+                                <div class="filter-option" data-value="today">Today</div>
+                                <div class="filter-option" data-value="yesterday">Yesterday</div>
+                                <div class="filter-option" data-value="week">Past week</div>
+                                <div class="filter-option" data-value="month">Past month</div>
+                                <div class="filter-option" data-value="year">Past year</div>
+                            </div>
+                        </div>
+
+                        <!-- Type Filter -->
+                        <div class="filter-pill">
+                            <button class="filter-button" id="typeButton">
+                                <i class="fas fa-file"></i>
+                                Type
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div class="filter-dropdown" id="typeDropdown">
+                                <div class="filter-option" data-value="all">All</div>
+                                <div class="filter-option" data-value="word">Word</div>
+                                <div class="filter-option" data-value="excel">Excel</div>
+                                <div class="filter-option" data-value="powerpoint">PowerPoint</div>
+                                <div class="filter-option" data-value="pdf">PDF</div>
+                                <div class="filter-option" data-value="webpage">Webpage</div>
+                                <div class="filter-option" data-value="email">Email</div>
+                                <div class="filter-option" data-value="teams">Teams</div>
+                            </div>
+                        </div>
+
+                        <!-- Person Filter -->
+                        <div class="filter-pill">
+                            <button class="filter-button" id="personButton">
+                                <i class="fas fa-user"></i>
+                                Person
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div class="filter-dropdown person-filter" id="personDropdown">
+                                <input type="text" placeholder="Search for a person..." id="personFilter" class="person-search">
+                                <div class="person-suggestions">
+                                    <div class="person-option" data-person="john-smith">John Smith</div>
+                                    <div class="person-option" data-person="sarah-johnson">Sarah Johnson</div>
+                                    <div class="person-option" data-person="mike-davis">Mike Davis</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Results Content -->
+                    <div class="results-content">
+                        <div class="results-header">
+                            <div class="results-count">About 147 results for "group"</div>
+                            <div class="results-header-right">
+                                <div class="pagination-controls" id="paginationControls">
+                                    <button class="pagination-btn" id="prevPage" disabled>
+                                        <i class="fas fa-chevron-left"></i>
+                                    </button>
+                                    <span class="pagination-info" id="paginationInfo">Page 1 of 5</span>
+                                    <button class="pagination-btn" id="nextPage">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </button>
+                                </div>
+                                <div class="sort-options">
+                                    <label>Sort by:</label>
+                                    <select id="sortBy">
+                                        <option value="relevance">Relevance</option>
+                                        <option value="date">Date modified</option>
+                                        <option value="name">Name</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="active-filters" id="activeFilters">
+                            <!-- Active filters will be displayed here -->
+                        </div>
+
+                        <div class="results-list" id="resultsList">
+                            <!-- Search results will be populated here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Knowledge Sources Sidebar -->
+                <aside class="knowledge-sources-sidebar">
+                    <h3>Results</h3>
+                    
+                    <div class="source-options">
+                        <div class="source-option active" data-source="all">
+                            <span class="source-icon">🔍</span>
+                            <div class="source-info">
+                                <div class="source-name">All Results</div>
+                                <div class="source-count">8.2M</div>
+                            </div>
+                        </div>
+                        
+                        <div class="source-option" data-source="sharepoint">
+                            <span class="source-icon">🔷</span>
+                            <div class="source-info">
+                                <div class="source-name">SharePoint</div>
+                                <div class="source-count">4.9M</div>
+                            </div>
+                        </div>
+                        
+                        <div class="source-option" data-source="groups">
+                            <span class="source-icon">👥</span>
+                            <div class="source-info">
+                                <div class="source-name">Groups <span class="new-badge">NEW</span></div>
+                                <div class="source-count">1.2M</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Inline Groups Filter Options -->
+                        <div class="groups-inline-options" id="groupsInlineOptions" style="display: none;">
+                            <div class="group-filter-options">
+                                <label class="group-radio-option">
+                                    <input type="radio" name="groupsFilter" value="all-groups" checked>
+                                    <span class="radio-custom"></span>
+                                    All groups I'm a member of
+                                </label>
+                                <label class="group-radio-option">
+                                    <input type="radio" name="groupsFilter" value="specific-group">
+                                    <span class="radio-custom"></span>
+                                    Specific groups
+                                </label>
+                            </div>
+                            
+                            <div class="specific-group-selector" id="specificGroupSelector" style="display: none;">
+                                <div class="group-search-container">
+                                    <input type="text" placeholder="Search for groups..." id="groupSearch" class="group-search-input">
+                                </div>
+                                
+                                <div class="group-checkboxes" id="groupCheckboxes">
+                                    <label class="group-checkbox-option">
+                                        <input type="checkbox" name="selectedGroups" value="trading-agreements">
+                                        <span class="checkbox-custom"></span>
+                                        Trading Agreements
+                                    </label>
+                                    <label class="group-checkbox-option">
+                                        <input type="checkbox" name="selectedGroups" value="analysts-groups">
+                                        <span class="checkbox-custom"></span>
+                                        Analysts Groups
+                                    </label>
+                                    <label class="group-checkbox-option">
+                                        <input type="checkbox" name="selectedGroups" value="marketing-team">
+                                        <span class="checkbox-custom"></span>
+                                        Marketing Team
+                                    </label>
+                                    <label class="group-checkbox-option">
+                                        <input type="checkbox" name="selectedGroups" value="product-managers">
+                                        <span class="checkbox-custom"></span>
+                                        Product Managers
+                                    </label>
+                                    <label class="group-checkbox-option">
+                                        <input type="checkbox" name="selectedGroups" value="finance-committee">
+                                        <span class="checkbox-custom"></span>
+                                        Finance Committee
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="source-option" data-source="graph">
+                            <span class="source-icon">📊</span>
+                            <div class="source-info">
+                                <div class="source-name">ICM Graph Connection</div>
+                                <div class="source-count">1.8M</div>
+                            </div>
+                        </div>
+                        
+                        <div class="source-option" data-source="devops">
+                            <span class="source-icon">🔧</span>
+                            <div class="source-info">
+                                <div class="source-name">Azure DevOps</div>
+                                <div class="source-count">740K</div>
+                            </div>
+                        </div>
+                        
+                        <div class="source-option" data-source="teams">
+                            <span class="source-icon">💬</span>
+                            <div class="source-info">
+                                <div class="source-name">Teams</div>
+                                <div class="source-count">25K</div>
+                            </div>
+                        </div>
+                        
+                        <div class="source-option" data-source="outlook">
+                            <span class="source-icon">📧</span>
+                            <div class="source-info">
+                                <div class="source-name">Outlook Mail</div>
+                                <div class="source-count">12K</div>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </main>
+    </div>
+
+    <script src="script-clean.js"></script>
+</body>
+</html>
+</html>
